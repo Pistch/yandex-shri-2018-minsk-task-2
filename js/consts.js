@@ -3,6 +3,7 @@
 
     SHRI_ISLANDS.WATER = 0;
     SHRI_ISLANDS.ISLAND = 1;
+    SHRI_ISLANDS.ISLAND_COLONIZED = '!';
 
     SHRI_ISLANDS.MAP = [
         [0, 0, 1, 0],

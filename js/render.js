@@ -1,6 +1,7 @@
 (function (root) {
     var WATER = root.SHRI_ISLANDS.WATER;
     var ISLAND = root.SHRI_ISLANDS.ISLAND;
+    var ISLAND_COLONIZED = root.SHRI_ISLANDS.ISLAND_COLONIZED;
 
     /**
      * Создает HTML элемент заданного типа с заданным CSS классом
@@ -24,18 +25,20 @@
     /**
      * Создает визуализацию карты по его схеме
      *
-     * @param {number[][]} map карта островов
+     * @param {number||string[][]} map карта островов
      * @param {number} count кол-во островов
+     * @param {[number,number]} pos позиция исследователя
      * @returns {HTMLElement} HTML элемент
      */
-    function render(map, count) {
+    function render(map, count, pos = null) {
         var containerElem = element('div', 'map'),
             rowElem,
             type,
             row,
             cell,
             x,
-            y;
+            y,
+            elem;
 
         containerElem.appendChild(element('div', 'map__res', 'Count: ' + Number(count)));
 
@@ -55,13 +58,21 @@
                         type = 'island';
                         break;
 
+                    case ISLAND_COLONIZED:
+                        type = 'island-colonized';
+                        break;
+
                     default:
                         type = undefined;
                 }
 
-                rowElem.appendChild(
-                    element('div', 'map__cell' + (type ? ' map__cell_' + type : ''))
-                );
+                elem = element('div', 'map__cell' + (type ? ' map__cell_' + type : ''));
+
+                if (pos && pos[1] === x && pos[0] === y) {
+                  elem.classList.add('map__cell_current');
+                }
+
+                rowElem.appendChild(elem);
             }
 
             containerElem.appendChild(rowElem);

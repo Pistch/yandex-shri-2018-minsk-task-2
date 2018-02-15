@@ -39,3 +39,11 @@ body {
 .map__cell_island {
     background-color: #fad946;
 }
+
+.map__cell_island-colonized {
+    background-color: #479637;
+}
+
+.map__cell_current {
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.5);
+}
